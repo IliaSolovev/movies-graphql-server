@@ -34,9 +34,15 @@ const Query = new GraphQLObjectType({
     },
     movies: {
       type: new GraphQLList(MovieType),
-      args: {filter: {type: new GraphQLNonNull(GraphQLString)}},
-      resolve(parent, {filter}){
-        return Movies.find({},null, {limit: 10, sort: {[filter]: 'desc'}});
+      args: {
+        filter: {type: new GraphQLNonNull(GraphQLString)},
+        searchType: {type: new GraphQLNonNull(GraphQLString)},
+        searchValue: {type: new GraphQLNonNull(GraphQLString)}
+        },
+      resolve(parent, {filter, searchType, searchValue}){
+        return Movies.find({
+          [searchType]: new RegExp(`${searchValue}`,'i')
+        },null, {limit: 10, sort: {[filter]: 'desc'}});
       }
     }
   }
