@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3005;
+const PORT = 8080;
 const password = 'Jakw2tuKVklB1GOq';
 const dbName = 'movies';
 mongoose.connect(`mongodb+srv://Ilia:${password}@cluster0-wbjyc.mongodb.net/${dbName}?retryWrites=true&w=majority`, { useNewUrlParser: true,useUnifiedTopology: true  });
